@@ -1,4 +1,4 @@
-package api.HealthCheck.com;
+package com.api.features;
 
 import com.intuit.karate.Results;
 import com.intuit.karate.Runner;
@@ -20,7 +20,7 @@ class TestRunner {
 
 	@Test
 	void testParallel() {
-		Results results = Runner.path("classpath:api/HealthCheck/com").tags("~@ignore").parallel(5);
+		Results results = Runner.path("classpath:com/api/features").tags("@callGET").parallel(5);
 		generateReport(results.getReportDir());
 		assertEquals(0, results.getFailCount(), results.getErrorMessages());
 	}
@@ -28,8 +28,11 @@ class TestRunner {
 	public static void generateReport(String karateOutputPath) {
 		Collection<File> jsonFiles = FileUtils.listFiles(new File(karateOutputPath), new String[] { "json" }, true);
 		List<String> jsonPaths = new ArrayList<String>(jsonFiles.size());
-		jsonFiles.forEach(file -> jsonPaths.add(file.getAbsolutePath()));
-		Configuration config = new Configuration(new File("target"), "demo");
+		//jsonFiles.forEach(file -> jsonPaths.add(file.getAbsolutePath()));
+		for(File file : jsonFiles){
+			jsonPaths.add(file.getAbsolutePath());
+		}
+		Configuration config = new Configuration(new File("target"), "REST API Automation - Karate");
 		ReportBuilder reportBuilder = new ReportBuilder(jsonPaths, config);
 		reportBuilder.generateReports();
 	}
