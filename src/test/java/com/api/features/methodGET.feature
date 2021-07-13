@@ -5,7 +5,7 @@ Feature: This feature is to validate POST method.
     * def validUser = read('com/api/data/validUser1.json');
     * url 'https://reqres.in'
 
-  @JavaSciptFunctionsValidatingResponse @callGET
+  @JavaSciptFunctionsValidatingResponse @OperationGET
   Scenario: Validate sucessfull GET request.
     Given path '/api/users'
     Given param page = '2'
@@ -33,4 +33,4 @@ Feature: This feature is to validate POST method.
     * def userDetails = call resFun res
     * def expectedOutput = read('com/api/data/JavaSciptFunctionsValidatingResponse.json')
     Then print 'userDetails ----> ' , userDetails
-    Then match response == expectedOutput
+    #Then match response == expectedOutput

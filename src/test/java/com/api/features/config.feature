@@ -9,11 +9,10 @@ Feature: This feature is to validate POST method.
     Given url baseUrl
     And path '/api/users'
     And param page = '2'
-    And request validUser
     And header Content-Type = 'application/json'
     When method GET
     Then status 200
     And print 'response -----> ', response
-    And print 'authInfo -->',authInfo
     And print 'response auth -->',auth
     And print 'accesstoken -->',authInfo.response.token
+    And match auth.response.token == authInfo.response.token

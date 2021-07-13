@@ -5,7 +5,7 @@ Feature: This feature is to validate POST method.
     * def validUser = read('com/api/data/validUser1.json');
     * url 'https://reqres.in'
 
-  @callPOST
+  @OperationPOST
   Scenario: Validate sucessfull POST request.
     Given path '/api/users'
     And request validUser
@@ -17,3 +17,4 @@ Feature: This feature is to validate POST method.
     Then match response.job == validUser.job
     Then match response.name contains validUser.name
     Then print "response.status --->", response.status
+    Then print "response.createdAt --->", response.createdAt
